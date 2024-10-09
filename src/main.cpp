@@ -32,19 +32,28 @@ void loop() {
 
         lcd.setCursor(0, 0);
         lcd.print("Deep");
-        lcd.setCursor(0, 1);
-        lcd.print(resetDistance);
-        lcd.setCursor(4, 1);
+        if (resetDistance >= 0.2) {
+            lcd.setCursor(0, 1);
+            lcd.print(resetDistance);
+        } else {
+            lcd.setCursor(0, 1);
+            lcd.print(0.00);
+        }        lcd.setCursor(4, 1);
         lcd.print("cm");
 
         lcd.setCursor(8, 0);
         lcd.print("Vol");
-        lcd.setCursor(8, 1);
-        lcd.print(resetDistance * calculateArea(VASE_DIAMETER));
+        if (resetDistance >= 0.2) {
+            lcd.setCursor(8, 1);
+            lcd.print(resetDistance * calculateArea(VASE_DIAMETER));
+        } else {
+            lcd.setCursor(8, 1);
+            lcd.print(0.00);
+        }
         lcd.setCursor(13, 1);
         lcd.print("ml");
 
         Serial.println(resetDistance);  // Optional for watching the reset distance in the serial monitor
-        delay(500);
+        delay(1000);
     }
 }
